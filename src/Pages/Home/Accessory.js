@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Accessory = ({ accessory }) => {
   const { img, description, productName, minOrderQnty, availableQnty, price } =
@@ -22,7 +23,9 @@ const Accessory = ({ accessory }) => {
         </div>
 
         <div className="card-actions">
-          <button className="btn btn-primary">Order Now</button>
+          <Link to="/">
+            <button className="btn btn-primary">Order Now</button>
+          </Link>
         </div>
       </div>
     </div>
