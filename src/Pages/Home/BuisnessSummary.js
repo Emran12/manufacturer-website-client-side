@@ -23,8 +23,11 @@ const BuisnessSummary = () => {
               ></path>
             </svg>
           </div>
-          <div className="stat-title text-xl  text-blue-700">
-            Served Cutomers
+          <div
+            className="stat-title text-xl  
+          text-blue-700"
+          >
+            Served Customers
           </div>
           <div className="stat-value">200+</div>
         </div>

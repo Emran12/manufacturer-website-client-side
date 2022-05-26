@@ -1,9 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Accessory = ({ accessory }) => {
-  const { img, description, productName, minOrderQnty, availableQnty, price } =
-    accessory;
+  const {
+    _id,
+    img,
+    description,
+    productName,
+    minOrderQnty,
+    availableQnty,
+    price,
+  } = accessory;
+
+  const navigate = useNavigate();
+
+  const handleOrder = (id) => {
+    navigate(`/order/${id}`);
+  };
   return (
     <div className="card w-96 bg-base-100 shadow-xl ">
       <figure className="px-10 pt-10">
@@ -23,9 +36,9 @@ const Accessory = ({ accessory }) => {
         </div>
 
         <div className="card-actions">
-          <Link to="/">
-            <button className="btn btn-primary">Order Now</button>
-          </Link>
+          <button onClick={() => handleOrder(_id)} className="btn btn-primary">
+            Order Now
+          </button>
         </div>
       </div>
     </div>

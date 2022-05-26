@@ -7,19 +7,6 @@ const Navbar = () => {
       <li>
         <Link to="/home">Home</Link>
       </li>
-
-      <li>
-        <Link to="/appointment">Accessories</Link>
-      </li>
-      <li>
-        <Link to="/reviews">Reviews</Link>
-      </li>
-      <li>
-        <Link to="/about">Blog</Link>
-      </li>
-      <li>
-        <Link to="/contactus ">Contact Us</Link>
-      </li>
       <li>
         <Link to="/login">Login</Link>
       </li>
@@ -47,7 +34,7 @@ const Navbar = () => {
           </label>
           <ul
             tabIndex="0"
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 flex justify-end"
           >
             {elements}
           </ul>
@@ -59,7 +46,7 @@ const Navbar = () => {
           Computer Accessories
         </Link>
       </div>
-      <div className="navbar-center hidden lg:flex">
+      <div className="navbar-center hidden lg:flex justify-end">
         <ul className="menu menu-horizontal text-white p-0">{elements}</ul>
       </div>
     </div>
