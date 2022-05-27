@@ -8,8 +8,8 @@ const Accessory = ({ accessory }) => {
     description,
     productName,
     minOrderQnty,
-    availableQnty,
     price,
+    availableQnty,
   } = accessory;
 
   const navigate = useNavigate();

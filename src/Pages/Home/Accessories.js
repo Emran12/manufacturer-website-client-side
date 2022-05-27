@@ -11,7 +11,7 @@ const Accessories = () => {
   }, []);
   return (
     <div>
-      <div className="grid sm:grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-5">
+      <div className="grid sm:grid-cols-1 md:grid-cols-2  lg:grid-cols-3  gap-5">
         {parts.map((part) => (
           <Accessory key={part._id} accessory={part}></Accessory>
         ))}
