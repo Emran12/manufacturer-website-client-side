@@ -3,7 +3,7 @@ import React from "react";
 const BuisnessSummary = () => {
   return (
     <>
-      <h1 className="text-4xl text-center font-bold text-blue-800 mt-16">
+      <h1 className="text-4xl text-center font-bold text-blue-800 mt-16 p-4">
         Buisness Summary
       </h1>
       <div className="mt-5 shadow-xl grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -68,7 +68,7 @@ const BuisnessSummary = () => {
           <div className="stat-value">15K+</div>
         </div>
 
-        <div className="stat border rounded-xl">
+        <div className="stat border rounded-xl p-8">
           <div className="stat-figure text-secondary">
             <svg
               xmlns="http://www.w3.org/2000/svg"
