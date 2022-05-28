@@ -18,11 +18,11 @@ const Reviews = () => {
             <div className="card w-96 h-96 bg-white shadow-xl">
               <div>
                 <figure className="px-10 pt-10">
-                  <img
-                    src={review.img}
-                    alt=""
-                    className="rounded-full w-24 h-24 "
-                  />
+                  <div className="avatar">
+                    <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                      <img src={review.img} alt="" />
+                    </div>
+                  </div>
                 </figure>
 
                 <h2 className="text-center text-xl">{review.buyerName}</h2>
