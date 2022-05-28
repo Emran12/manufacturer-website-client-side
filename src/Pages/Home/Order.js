@@ -10,15 +10,56 @@ const Order = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isDisabled, setIsdisabled] = useState(true);
   const [inputField, setInputField] = useState(false);
+  const [counter, setCounter] = useState(0);
+  const [decBtnDisabled, setDecBtnDisabled] = useState(false);
+  const [increBtnDisabled, setIncreBtnDisabled] = useState(false);
 
   useEffect(() => {
     fetch(`http://localhost:5000/accessories/${id}`)
       .then((res) => res.json())
-      .then((data) => setAccessory(data));
-  }, [id]);
+      .then((data) => {
+        setAccessory(data);
+      });
+    setCounter(accessory.minOrderQnty);
+  }, [id, accessory.minOrderQnty]);
 
-  const handleQuantity = (e) => {
-    const inputQnty = e.target.value;
+  const incrementCounter = (e) => {
+    setCounter(counter + 1);
+    console.log(counter);
+    if (counter >= accessory.availableQnty) {
+      setErrorMessage(
+        <p className="text-red-500">
+          Please Order within {accessory.availableQnty} pieces
+        </p>
+      );
+      setIncreBtnDisabled(true);
+    }
+    if (counter >= accessory.minOrderQnty) {
+      setDecBtnDisabled(false);
+    }
+  };
+
+  const decrementCounter = (e) => {
+    const temp = counter - 1;
+    setCounter(temp);
+    console.log(counter);
+    if (counter <= accessory.minOrderQnty) {
+      setErrorMessage(
+        <p className="text-red-500">
+          Please Order minimum {accessory.minOrderQnty} pieces
+        </p>
+      );
+      setDecBtnDisabled(true);
+    }
+    if (counter <= accessory.availableQnty) {
+      setIncreBtnDisabled(false);
+    }
+  };
+
+  const handleInputQnty = (e) => {
+    e.preventDefault();
+    setCounter(e.target.value);
+    const inputQnty = counter;
     console.log(inputQnty, e);
     if (
       inputQnty < accessory.minOrderQnty ||
@@ -92,50 +133,101 @@ const Order = () => {
 
   return (
     <div className="mx-16">
-      <div className="hero min-h-screen bg-white">
-        <div className="hero-content flex-col lg:flex-row">
+      <div className="flex justify-evenly">
+        <div className="w-96">
           <img
             src={accessory.img}
             className="max-w-sm rounded-lg shadow-2xl"
             alt=""
           />
-          <div className="m-16">
-            <h1 className="text-5xl font-bold">{accessory.productName}</h1>
-            <p className="py-4">{accessory?.description?.slice(0, 250)}</p>
-            <p>
-              Availability:
-              {accessory.availableQnty >= accessory.minOrderQnty ? (
-                <span className="text-secondary">
-                  Stock Available {accessory.availableQnty}
-                </span>
-              ) : (
-                <span className="text-red-500">Out of Stock</span>
-              )}
-            </p>
-            <p>
-              Minimum Order Quantity:
-              {accessory.minOrderQnty > 1
-                ? ` ${accessory.minOrderQnty} pieces `
-                : ` ${accessory.minOrderQnty} piece`}
-            </p>
-            <p>Price: ${accessory.price}</p>
-            {errorMessage}
-            <form onSubmit={handleSubmit}>
-              <input
-                className="border-2  border-blue-500 rounded h-12"
-                type="number"
-                name="quantity"
-                value={accessory.minOrderQnty}
-                disabled={inputField}
-                onChange={handleQuantity}
-                id=""
-              />
+          <h1 className="text-3xl font-bold py-4 mt-5">
+            {accessory.productName}
+          </h1>
+          <p className="py-4">{accessory?.description?.slice(0, 250)}</p>
+        </div>
+        <div className="pt-12">
+          <p>
+            Availability:
+            {accessory.availableQnty >= accessory.minOrderQnty ? (
+              <span className="text-secondary">
+                Stock Available {accessory.availableQnty}
+              </span>
+            ) : (
+              <span className="text-red-500">Out of Stock</span>
+            )}
+          </p>
+          <p>
+            Minimum Order Quantity:
+            {accessory.minOrderQnty > 1
+              ? ` ${accessory.minOrderQnty} pieces `
+              : ` ${accessory.minOrderQnty} piece`}
+          </p>
+          <p>Price: ${accessory.price}</p>
 
-              <button className="btn btn-primary" disabled={isDisabled}>
-                Order Now
-              </button>
-            </form>
+          {errorMessage}
+
+          <p>
+            <span className="text-xl text-blue-500">Quantity:</span>
+            <button
+              className="border-2 border-black p-2"
+              onClick={decrementCounter}
+              disabled={decBtnDisabled}
+            >
+              -
+            </button>
+            <input
+              value={counter}
+              className="w-24 p-2 m-2 border-2 border-black"
+              id="inputQnty"
+              onChange={handleInputQnty}
+              disabled={inputField}
+            />
+            <button
+              className="border-2 border-black p-2"
+              onClick={incrementCounter}
+              disabled={increBtnDisabled}
+            >
+              +
+            </button>
+          </p>
+
+          <div className="grid grid-cols-1 gap-4 mt-6">
+            <input
+              type="text"
+              name="name"
+              id=""
+              placeholder={user?.displayName}
+              className="border-2 border-blue-300 w-64 h-12 text-xl "
+              disabled
+            />
+            <input
+              type="email"
+              name="email"
+              id=""
+              placeholder={user?.email}
+              className="border-2 border-blue-300 w-64 h-12 text-xl "
+              disabled
+            />
+            <input
+              type="tel"
+              name="phone"
+              id=""
+              placeholder="Enter Phone Number"
+              className="border-2 border-blue-300 w-64 h-12 text-xl "
+            />
+            <input
+              type="text"
+              name="address"
+              id=""
+              placeholder="Enter address"
+              className="border-2 border-blue-300 w-64 h-12 text-xl "
+            />
           </div>
+          <form onSubmit={handleSubmit}>
+            <button className="btn btn-primary" disabled={isDisabled}>
+              Order Now
+            </button>
+          </form>
         </div>
       </div>
     </div>
