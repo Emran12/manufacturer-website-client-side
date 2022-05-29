@@ -25,7 +25,6 @@ const Order = () => {
 
   const incrementCounter = (e) => {
     setCounter(counter + 1);
-    console.log(counter);
     if (counter >= accessory.availableQnty) {
       setErrorMessage(
         <p className="text-red-500">
@@ -69,7 +68,6 @@ const Order = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const qnty = counter;
-    console.log(e.target.address.value);
     const totalPrice = qnty * accessory.price;
     const data = {
       buyer: user.email,

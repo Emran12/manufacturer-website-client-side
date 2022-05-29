@@ -41,7 +41,7 @@ function App() {
         >
           <Route index element={<MyProfile></MyProfile>}></Route>
           <Route
-            path="/dashboard/myorders"
+            path="/dashboard/myorders/:email"
             element={<MyOrders></MyOrders>}
           ></Route>
           <Route
