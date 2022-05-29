@@ -109,7 +109,7 @@ const Order = () => {
       .then((data) => {
         console.log("success", data);
       });
-    navigate("/home");
+    navigate("/");
   };
 
   return (

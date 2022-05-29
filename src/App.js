@@ -18,7 +18,7 @@ function App() {
     <div>
       <Navbar></Navbar>
       <Routes>
-        <Route path="/home" element={<Home></Home>}></Route>
+        <Route path="/" element={<Home></Home>}></Route>
         <Route
           path="/myportfolio"
           element={<MyPortfolio></MyPortfolio>}
@@ -40,8 +40,14 @@ function App() {
           }
         >
           <Route index element={<MyProfile></MyProfile>}></Route>
-          <Route path="/myorders" element={<MyOrders></MyOrders>}></Route>
-          <Route path="/addareview" element={<AddAReview></AddAReview>}></Route>
+          <Route
+            path="/dashboard/myorders"
+            element={<MyOrders></MyOrders>}
+          ></Route>
+          <Route
+            path="/dashboard/addareview"
+            element={<AddAReview></AddAReview>}
+          ></Route>
         </Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/signup" element={<SignUp></SignUp>}></Route>
