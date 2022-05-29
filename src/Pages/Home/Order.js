@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import auth from "../../firebase.init";
 
 const Order = () => {
@@ -8,11 +8,11 @@ const Order = () => {
   const [user] = useAuthState(auth);
   const [accessory, setAccessory] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
-  const [isDisabled, setIsdisabled] = useState(true);
   const [inputField, setInputField] = useState(false);
   const [counter, setCounter] = useState(0);
   const [decBtnDisabled, setDecBtnDisabled] = useState(false);
   const [increBtnDisabled, setIncreBtnDisabled] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`http://localhost:5000/accessories/${id}`)
@@ -59,39 +59,17 @@ const Order = () => {
   const handleInputQnty = (e) => {
     e.preventDefault();
     setCounter(e.target.value);
-    const inputQnty = counter;
-    console.log(inputQnty, e);
-    if (
-      inputQnty < accessory.minOrderQnty ||
-      inputQnty > accessory.availableQnty
-    )
+    if (counter < accessory.minOrderQnty) {
       setInputField(true);
-    if (inputQnty < accessory.minOrderQnty) {
-      setErrorMessage(
-        <p className="text-red-500">
-          Please Order minimum {accessory.minOrderQnty} pieces
-        </p>
-      );
-      setIsdisabled(true);
-    } else if (
-      inputQnty > accessory.availableQnty &&
-      inputQnty < accessory.minOrderQnty
-    ) {
-      setErrorMessage(
-        <p className="text-red-500">
-          Please Order within {accessory.availableQnty} pieces
-        </p>
-      );
-      setIsdisabled(true);
-    } else {
-      setErrorMessage("");
-      setIsdisabled(false);
+      setIncreBtnDisabled(true);
+      setDecBtnDisabled(true);
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const qnty = e.target.quantity.value;
+    const qnty = counter;
+    console.log(e.target.address.value);
     const totalPrice = qnty * accessory.price;
     const data = {
       buyer: user.email,
@@ -100,6 +78,8 @@ const Order = () => {
       quantity: qnty,
       unitPrice: `$${accessory.price}`,
       totalPrice: ` $${totalPrice}`,
+      phoneNumber: e.target.phone.value,
+      address: e.target.address.value,
     };
 
     fetch(`http://localhost:5000/order`, {
@@ -129,6 +109,7 @@ const Order = () => {
       .then((data) => {
         console.log("success", data);
       });
+    navigate("/home");
   };
 
   return (
@@ -190,43 +171,41 @@ const Order = () => {
               +
             </button>
           </p>
-
-          <div className="grid grid-cols-1 gap-4 mt-6">
-            <input
-              type="text"
-              name="name"
-              id=""
-              placeholder={user?.displayName}
-              className="border-2 border-blue-300 w-64 h-12 text-xl "
-              disabled
-            />
-            <input
-              type="email"
-              name="email"
-              id=""
-              placeholder={user?.email}
-              className="border-2 border-blue-300 w-64 h-12 text-xl "
-              disabled
-            />
-            <input
-              type="tel"
-              name="phone"
-              id=""
-              placeholder="Enter Phone Number"
-              className="border-2 border-blue-300 w-64 h-12 text-xl "
-            />
-            <input
-              type="text"
-              name="address"
-              id=""
-              placeholder="Enter address"
-              className="border-2 border-blue-300 w-64 h-12 text-xl "
-            />
-          </div>
           <form onSubmit={handleSubmit}>
-            <button className="btn btn-primary" disabled={isDisabled}>
-              Order Now
-            </button>
+            <div className="grid grid-cols-1 gap-4 mt-6">
+              <input
+                type="text"
+                name="name"
+                id=""
+                placeholder={user?.displayName}
+                className="border-2 border-blue-300 w-64 h-12 text-xl "
+                disabled
+              />
+              <input
+                type="email"
+                name="email"
+                id=""
+                placeholder={user?.email}
+                className="border-2 border-blue-300 w-64 h-12 text-xl "
+                disabled
+              />
+              <input
+                type="tel"
+                name="phone"
+                id=""
+                placeholder="Enter Phone Number"
+                className="border-2 border-blue-300 w-64 h-12 text-xl "
+              />
+              <input
+                type="text"
+                name="address"
+                id=""
+                placeholder="Enter address"
+                className="border-2 border-blue-300 w-64 h-12 text-xl "
+              />
+            </div>
+
+            <button className="btn btn-primary">Order Now</button>
           </form>
         </div>
       </div>

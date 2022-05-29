@@ -85,7 +85,7 @@ const Footer = () => {
             Head office
           </Link>
           <Link to="/home" className="link link-hover">
-            Ryans IT Limited
+            Computer Acessories IT Limited
           </Link>
           <Link to="/home" className="link link-hover">
             Kusholi Bhaban, 4th Floor, 238/1 Begum
