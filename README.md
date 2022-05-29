@@ -1,12 +1,12 @@
-# Getting Started with Create React App
+### `Live Site`
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+visit computer-accessories
+[https://computer-accessories-fe813.web.app/](https://computer-accessories-fe813.web.app/)
 
-## Available Scripts
+### `Funcitonalities`
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- require auth implemented
+- added dashboard(user/admin)
+- customer reviews
+- added all products management for user
+- added profile for use/admin

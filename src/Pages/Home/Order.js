@@ -15,7 +15,7 @@ const Order = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/accessories/${id}`)
+    fetch(`https://immense-oasis-14118.herokuapp.com/accessories/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setAccessory(data);
@@ -80,7 +80,7 @@ const Order = () => {
       address: e.target.address.value,
     };
 
-    fetch(`http://localhost:5000/order`, {
+    fetch(`https://immense-oasis-14118.herokuapp.com/order`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -96,7 +96,7 @@ const Order = () => {
       availableQnty: accessory.availableQnty,
       bookedQnty: qnty,
     };
-    fetch(`http://localhost:5000/accessories/${id}`, {
+    fetch(`https://immense-oasis-14118.herokuapp.com/accessories/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

@@ -12,6 +12,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import MyProfile from "./Pages/Dashboard/MyProfile";
 import MyOrders from "./Pages/Dashboard/MyOrders";
 import AddAReview from "./Pages/Dashboard/AddAReview";
+import Blog from "./Pages/Blog/Blog";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Navbar></Navbar>
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
+        <Route path="/blog" element={<Blog></Blog>}></Route>
         <Route
           path="/myportfolio"
           element={<MyPortfolio></MyPortfolio>}
