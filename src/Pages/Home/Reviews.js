@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
-    fetch("https://immense-oasis-14118.herokuapp.com/reviews")
+    fetch("http://localhost:5000/reviews")
       .then((res) => res.json())
       .then((data) => setReviews(data));
   }, []);
@@ -34,7 +34,6 @@ const Reviews = () => {
                 </div>
               </div>
             </div>
-            ;
           </div>
         ))}
         ;

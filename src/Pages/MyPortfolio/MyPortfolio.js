@@ -5,7 +5,7 @@ import project3 from "./project3.PNG";
 
 const MyPortfolio = () => {
   return (
-    <div className="px-16">
+    <div className="px-16 mt-16">
       <div className="flex justify-center">
         <div className="text-xl">
           <h1> Md. Emran Hossain</h1>

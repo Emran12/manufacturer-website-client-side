@@ -13,6 +13,7 @@ import MyProfile from "./Pages/Dashboard/MyProfile";
 import MyOrders from "./Pages/Dashboard/MyOrders";
 import AddAReview from "./Pages/Dashboard/AddAReview";
 import Blog from "./Pages/Blog/Blog";
+import UpdateProfile from "./Pages/Dashboard/UpdateProfile";
 
 function App() {
   return (
@@ -49,6 +50,10 @@ function App() {
           <Route
             path="/dashboard/addareview"
             element={<AddAReview></AddAReview>}
+          ></Route>
+          <Route
+            path="/dashboard/updateprofile"
+            element={<UpdateProfile></UpdateProfile>}
           ></Route>
         </Route>
         <Route path="/login" element={<Login></Login>}></Route>

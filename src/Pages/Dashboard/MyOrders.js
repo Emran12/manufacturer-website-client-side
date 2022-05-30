@@ -5,7 +5,7 @@ import auth from "../../firebase.init";
 const MyOrders = () => {
   const [user] = useAuthState(auth);
   const [orders, setOrders] = useState([]);
-  const url = `https://immense-oasis-14118.herokuapp.com/orders/${user.email}`;
+  const url = `http://localhost:5000/orders/${user.email}`;
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
@@ -17,7 +17,7 @@ const MyOrders = () => {
       `Are you sure want to delete ${productName}?`
     );
     if (confirm) {
-      const url = `https://immense-oasis-14118.herokuapp.com/orders/${id}`;
+      const url = `http://localhost:5000/orders/${id}`;
       fetch(url, {
         method: "DELETE",
       })
