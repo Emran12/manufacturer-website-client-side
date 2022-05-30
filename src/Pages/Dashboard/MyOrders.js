@@ -1,23 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 
 const MyOrders = () => {
   const [user] = useAuthState(auth);
   const [orders, setOrders] = useState([]);
-  const url = `http://localhost:5000/orders/${user.email}`;
+  const url = `https://immense-oasis-14118.herokuapp.com/orders/${user.email}`;
+  const navigate = useNavigate();
+
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
       .then((data) => setOrders(data));
   }, [url]);
 
+  const handlePayment = (id) => {
+    navigate(`/dashboard/payment/${id}`);
+  };
+
   const handleDelBtn = (id, productName) => {
     const confirm = window.confirm(
       `Are you sure want to delete ${productName}?`
     );
     if (confirm) {
-      const url = `http://localhost:5000/orders/${id}`;
+      const url = `https://immense-oasis-14118.herokuapp.com/orders/${id}`;
       fetch(url, {
         method: "DELETE",
       })
@@ -42,6 +49,7 @@ const MyOrders = () => {
               <th>Product</th>
               <th>Quantity</th>
               <th>Total Price</th>
+              <th>Payment Status</th>
               <th>Del.Btn.</th>
             </tr>
           </thead>
@@ -56,11 +64,23 @@ const MyOrders = () => {
                 <td>{order.totalPrice}</td>
                 <td>
                   <button
-                    onClick={() => handleDelBtn(order._id, order.productName)}
-                    className="bg-red-500 border p-2 rounded-xl"
+                    className="border bg-yellow-500 text-white p-2 rounded capitalize"
+                    onClick={() => handlePayment(order._id)}
                   >
-                    Delete
+                    {order.paymentStatus}
                   </button>
+                </td>
+                <td>
+                  {order.paymentStatus === "not paid" ? (
+                    <button
+                      onClick={() => handleDelBtn(order._id, order.productName)}
+                      className="bg-red-500 border p-2 rounded"
+                    >
+                      Delete
+                    </button>
+                  ) : (
+                    ""
+                  )}
                 </td>
               </tr>
             </tbody>

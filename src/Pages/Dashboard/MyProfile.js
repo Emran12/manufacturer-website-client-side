@@ -9,7 +9,7 @@ const MyProfile = () => {
   const [userInfo, setUserInfo] = useState({});
   const navigate = useNavigate();
   useEffect(() => {
-    fetch(`http://localhost:5000/users/${user.email}`)
+    fetch(`https://immense-oasis-14118.herokuapp.com/users/${user.email}`)
       .then((res) => res.json())
       .then((data) => setUserInfo(data));
   }, [user.email]);

@@ -7,7 +7,7 @@ const UpdateProfile = () => {
   const [user] = useAuthState(auth);
   const [userInfo, setUserInfo] = useState({});
   useEffect(() => {
-    fetch(`http://localhost:5000/users/${user.email}`)
+    fetch(`https://immense-oasis-14118.herokuapp.com/users/${user.email}`)
       .then((res) => res.json())
       .then((data) => setUserInfo(data));
   }, [user.email]);
@@ -27,7 +27,7 @@ const UpdateProfile = () => {
       phoneNumber: e.target.phone.value,
       address: e.target.address.value,
     };
-    fetch(`http://localhost:5000/users/${user.email}`, {
+    fetch(`https://immense-oasis-14118.herokuapp.com/users/${user.email}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -38,7 +38,6 @@ const UpdateProfile = () => {
       .then((data) => console.log("success", data));
     // navigate("/dashboard");
   };
-
   return (
     <div>
       <div className="flex justify-center items-center">
